@@ -54,6 +54,7 @@
 ###> symfony/framework-bundle ###
 /.env.local
 /.env
+/.env.*
 /.env.local.php
 /.env.*.local
 /.env.test
@@ -61,7 +62,9 @@
 /.env.test.php
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
-/var/
+var/
+/var/cache/
+/var/logs/
 /vendor/
 ###< symfony/framework-bundle ###
 
@@ -87,11 +90,33 @@ composer.phar
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 # composer.lock
 
-/.idea
-
+/.idea/
+.idea/
 manifest/cache/
 manifest/logs/
 manifest/tmp/
 symphony/
 workspace/uploads/
 install-log.txt
+/public/js/
+public/build/
+/.cache/
+/node_modules/
+/public/css/
+
+/vendor/
+
+/data/
+
+.DS_Store
+Thumbs.db
+
+/logs/
+
+var/
+vendor/
+public/uploads/
+public/build/
+node_modules/
+.vscode/
+symfony.lock
