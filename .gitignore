@@ -119,4 +119,4 @@ public/uploads/
 public/build/
 node_modules/
 .vscode/
-symfony.lock
+/symfony.lock
