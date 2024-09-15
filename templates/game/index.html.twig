@@ -20,7 +20,7 @@
                 <p>PEGI {{game.pegi}} </p>
 
                 {%if app.user %}
-                    <a href= "# {# {{ path ('app_cart_add', {id : game.id} )}}#}" class ="btn btn-success w-100 mt-3">Ajouter au panier</a>
+                    <a href= "{{ path ('app_cart_add', {id : game.id} )}}}" class ="btn btn-success w-100 mt-3">Ajouter au panier</a>
                 {% else %}
                     <a class ="btn btn-warning w-100 mt-3 disabled" >Connectez vous pour ajouter un produit au panier</a>
                 {% endif %}
