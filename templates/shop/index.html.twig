@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container-flex my-4">
+
+        <div class="row">
+
+            <div class="col-md-1" style="padding-top: 100px">
+                {% include 'genre/_menu_genres.html.twig' %}
+            </div>
+
+            <div class="col-md-10">
+                <h1>Shop</h1>
+                <p>{{ allGames|length }} produit(s) trouvé(s).</p>
+                <div class="row">
+                        {% for game in allGames %}
+                            <div class= "col-md-3 text-center">
+                                <a href ="{{path('app_game',{slug : game.slug})}}" class= "text-decoration-none">
+                                    <img src="/uploads/{{game.image}}" class="img-fluid">
+                                    <span class="d-block fw-bold ">{{game.name}}</span>
+                                </a>
+                                <span class="d-block">{{game.price| price }}</span>
+                            </div>
+                    {% endfor %}
+                </div>
+            </div>
+            </div>
+        </div>
+
+{% endblock %}
