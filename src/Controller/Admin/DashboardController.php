@@ -11,8 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use App\Entity\User;
 use App\Entity\Game;
-/*use App\Entity\Store;
-use App\Entity\Order;*/
+use App\Entity\Store;
+/*use App\Entity\Order;*/
 
 class DashboardController extends AbstractDashboardController
 {
@@ -48,8 +48,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Users', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Genres', 'fas fa-list', Genre::class);
         yield MenuItem::linkToCrud('Jeux', 'fas fa-list', Game::class);
-        /*yield MenuItem::linkToCrud('Magasins', 'fas fa-list', Store::class);
-        yield MenuItem::linkToCrud('Commandes', 'fas fa-list', Order::class);
+        yield MenuItem::linkToCrud('Magasins', 'fas fa-list', Store::class);
+        /*yield MenuItem::linkToCrud('Commandes', 'fas fa-list', Order::class);
         yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);*/
     }
 }
