@@ -40,6 +40,7 @@ class CartController extends AbstractController
     #[Route('/cart/decrease/{id}', name: 'app_cart_decrease')]
     public function decrease($id,Cart $cart): Response
     {
+/*Voir ici comment rediriger vers la home si le panier redevient 0 et comment empêcher la vue du panier s'il est vide*/
 
         $cart->decrease($id);
 
@@ -69,3 +70,4 @@ class CartController extends AbstractController
 
 }
 
+/* TODO : Vérifier la redirection vers la home quand le panier est vidé et empêcher l'affichage d'une page si le panier est vide*/

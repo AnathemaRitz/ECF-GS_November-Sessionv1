@@ -35,13 +35,30 @@ class Order
     /**
      * @var Collection<int, OrderDetail>
      */
-    #[ORM\OneToMany(targetEntity: OrderDetail::class, mappedBy: 'myOrder')]
+    #[ORM\OneToMany(targetEntity: OrderDetail::class, mappedBy: 'myOrder', cascade: ['persist'])]
     private Collection $orderDetails;
+
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
     }
+
+    public function getTotal()
+    {
+        $total = 0;
+        $games = $this->getOrderDetails();
+
+        foreach ($games as $game) {
+            $total += ($game->getGamePrice()* $game->getGameQuantity());
+        }
+
+        return $total;
+    }
+
 
     public function getId(): ?int
     {
@@ -86,6 +103,7 @@ class Order
 
     public function getBillingAddress(): ?string
     {
+
         return $this->billingAddress;
     }
 
@@ -134,6 +152,18 @@ class Order
                 $orderDetail->setMyOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
