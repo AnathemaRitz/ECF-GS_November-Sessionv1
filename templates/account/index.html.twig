@@ -11,11 +11,11 @@
 
             <div class="col-md-9">
                 <h5>Mes dernières commandes</h5>
-            {# {% if orders|length == 0 %} #}
+            {% if orders|length == 0 %}
                     <div class="alert alert-info">
                         Vous n'avez passé aucune commande pour le moment.
                     </div>
-                {# {% else %} #}
+                {% else %}
                     <table class="table">
                         <thead>
                         <tr>
@@ -23,24 +23,27 @@
                             <th scope="col">Date</th>
                             <th scope="col">Statut</th>
                             <th scope="col">Magasin de retrait</th>
+                            <th scope="col">Date de retrait</th>
                             <th scope="col">Prix Total</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        {# {% for order in orders %}
+                        {% for order in orders %}
                             <tr>
                                 <td>{{ order.id }}</td>
                                 <td>{{ order.createdAt|date('d/m/Y') }}</td>
                                 <td>{{ include('admin/state.html.twig', { field : { 'value' : order.state } } ) }}</td>
+                                <td>{{ order.storeName }}</td>
+                                <td>{{ order.pickupDate|date('d/m/Y') }}</td>
                                 <td>{{ order.total|price }}</td>
-                                <td><a href="{{ path('app_account_order', { 'id_order' : order.id } ) }}">Voir</a></td>
+                                <td><a href="{{ path('app_account_order', { 'id_order' : order.id } ) }}">Voir le détail</a></td>}
                             </tr>
                         {% endfor %}
-                        </tbody>#}
+                        </tbody>
                     </table>
-            {# {% endif %} #}
+            {% endif %}
             </div>
         </div>
 

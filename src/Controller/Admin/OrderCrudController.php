@@ -61,7 +61,7 @@ class OrderCrudController extends AbstractCrudController
             AssociationField::new('user')->setLabel('Client'),
             TextField::new('storeName')->setLabel('Magasin de retrait'),
             DateField::new('pickupDate')->setLabel('Date de retrait'), /*Doit être non modifiable*/
-            /*TextField::new('storeName')->setLabel('Magasin de retrait'),
+            /*
             DateField::new('updatedAt'),*/
             NumberField::new('total')->setLabel("Total")
 

@@ -78,7 +78,7 @@ class OrderController extends AbstractController
             'choices' => $form ->getData(),
             'cart'=> $games,
             /* TODO : voir pourquoi la variable order ci dessous n'est pas reconnue */
-            /*'order' => $order,*/
+            'order' => $order,
             'total'=>$cart->getTotal(),
         ]);
     }
