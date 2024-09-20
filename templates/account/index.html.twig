@@ -9,7 +9,7 @@
                 {% include 'account/_menu.html.twig' %}
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-9 ">
                 <h5>Mes dernières commandes</h5>
             {% if orders|length == 0 %}
                     <div class="alert alert-info">
@@ -38,7 +38,7 @@
                                 <td>{{ order.storeName }}</td>
                                 <td>{{ order.pickupDate|date('d/m/Y') }}</td>
                                 <td>{{ order.total|price }}</td>
-                                <td><a href="{{ path('app_account_order', { 'id_order' : order.id } ) }}">Voir le détail</a></td>}
+                                <td><a href="{{ path('app_account_order', { 'id_order' : order.id } ) }}">Voir le détail</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
