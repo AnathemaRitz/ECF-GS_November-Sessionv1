@@ -20,7 +20,6 @@ class OrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
             ->add('store', EntityType::class, [
                 'label' => "Choisissez votre magasin de retrait",
                 'required' => true,
@@ -28,11 +27,11 @@ class OrderType extends AbstractType
                 'expanded' => true,
                 'label_html' => true
             ])
-
-            ->add('pickupDate', DateType::class,[
-                'label'=> "Choisissez votre date de retrait",
+            ->add('pickupDate', DateType::class, [
+                'label' => "Choisissez votre date de retrait",
                 'widget' => 'choice',
                 'input' => 'datetime_immutable',
+                'data' => new \DateTimeImmutable(), // Set default value to today's date
                 'constraints' => [
                     new Assert\NotNull(),
                     new Assert\Callback(function ($date, ExecutionContextInterface $context) {
@@ -59,23 +58,16 @@ class OrderType extends AbstractType
                     }),
                 ],
             ])
-
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',
                 'attr' => [
                     'class' => 'w-100 btn btn-success'
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
-     {
-         $resolver->setDefaults([
-             /*.'addresses' => null; */
-
-                 ]
-         );
-     }
-
+    {
+        $resolver->setDefaults([]);
+    }
 }
