@@ -61,7 +61,7 @@ class CartController extends AbstractController
         $cart->remove();
         $this->addFlash(
             "danger",
-            "Votre panier a bien été vidé."
+            "Votre panier package.json bien été vidé."
         );
 
         return $this->redirectToRoute('app_home');
