@@ -38,7 +38,7 @@
                                 <td>{{ order.storeName }}</td>
                                 <td>{{ order.pickupDate|date('d/m/Y') }}</td>
                                 <td>{{ order.total|price }}</td>
-                                <td><a href="{{ path('app_account_order', { 'id_order' : order.id } ) }}">Voir le détail</a></td>}
+                                <td><a href="{{ path('app_account_order', { 'id_order' : order.id } ) }}">Voir le détail</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
