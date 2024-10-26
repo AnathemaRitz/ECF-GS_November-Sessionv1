@@ -28,7 +28,7 @@ class OrderController extends AbstractController
     }
 
     #[Route('/order/summary', name: 'app_order_summary')]
-    public function add(Request $request, Cart $cart, EntityManagerInterface $entityManager): Response
+    public function summary(Request $request, Cart $cart, EntityManagerInterface $entityManager): Response
 
     {
         if ($request->getMethod() != 'POST') {
@@ -42,7 +42,6 @@ class OrderController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-
 
             $order = new Order();
             $order->setUser($this->getUser());
@@ -71,15 +70,47 @@ class OrderController extends AbstractController
                 $order->addOrderDetail($orderDetail);
             }
             $entityManager->persist($order);
+            $session = $request->getSession();
+            $session->set('order', $order);
+            /*dd($order) ;*/
+        }
+          ;
+        return $this->render('order/summary.html.twig', [
+                'choices' => $form->getData(),
+                'cart' => $games,
+                'total' => $cart->getTotal(),
+            ]);
+    }
+
+    #[Route('/order/validation', name: 'app_order_validation')]
+    public function add(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $session = $request->getSession();
+        $order = $session->get('order');
+
+
+
+        if ($order) {
+
+            $user = $this->getUser();
+            $cart=$session->get('cart');
+
+            if ($user) {
+                $order->setUser($user);
+            }
+
+
+            $entityManager->persist($order);
             $entityManager->flush();
+
+            $session->remove('cart');
+            $session->remove('order');
+
+
+            return $this->render('order/confirmation.html.twig');
         }
 
-        return $this->render('order/summary.html.twig', [
-            'choices' => $form ->getData(),
-            'cart'=> $games,
-            /* TODO : voir pourquoi la variable order ci dessous n'est pas reconnue */
-            /*'order' => $order,*/
-            'total'=>$cart->getTotal(),
-        ]);
+        return $this->redirectToRoute('app_order');
     }
+
 }
