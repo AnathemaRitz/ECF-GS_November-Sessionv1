@@ -74,7 +74,7 @@ class OrderController extends AbstractController
             $session->set('order', $order);
             /*dd($order) ;*/
         }
-          ;
+
         return $this->render('order/summary.html.twig', [
                 'choices' => $form->getData(),
                 'cart' => $games,
@@ -83,22 +83,34 @@ class OrderController extends AbstractController
     }
 
     #[Route('/order/validation', name: 'app_order_validation')]
-    public function add(Request $request, EntityManagerInterface $entityManager): Response
+    public function add(Request $request, Cart $cart,  EntityManagerInterface $entityManager): Response
     {
         $session = $request->getSession();
         $order = $session->get('order');
-
+        $games = $cart->getCart();
 
 
         if ($order) {
 
             $user = $this->getUser();
-            $cart=$session->get('cart');
 
             if ($user) {
                 $order->setUser($user);
             }
 
+            foreach($games as $game){
+                $gameObject = $entityManager->find(get_class($game['object']), $game['object']->getId());
+                $gameAvailability = $gameObject->getStock();
+                $gameStock = $gameAvailability - $game['qty'];
+
+                if ($gameStock < 0) {
+                    $this->addFlash('error',  $gameObject->getName().'.n\'est plus en stock. Veuillez mettre à jour la quantité désirée.');
+                    return $this->redirectToRoute('app_cart');
+                }
+
+                $gameObject->setStock($gameStock);
+
+            }
 
             $entityManager->persist($order);
             $entityManager->flush();
