@@ -1,12 +1,17 @@
 {% extends '@!EasyAdmin/layout.html.twig' %}
 
 {% block main %}
+<h2> Statut de la commande</h2>
 
-   <h3>Commande n°{{order.id}}</h3>
+
+<h3>Commande n°{{order.id}}</h3>
    {{include('admin/state.html.twig',{field: {'value':order.state}})}}
     <br/>
     <br/>
     <span>Passée le {{order.createdAt|date('d/m/Y')}}</span>
+    <br/>
+{# TODO : Mettre un event listener au changement de statut pour maj date updated #}
+    <span>Mise à jour le {#  {order.updatedAt|date('d/m/Y')}}#}</span>
 
 <div class="row my-4">
     <div class="col md-6">
@@ -61,8 +66,23 @@
     <strong>Total  : </strong> {{ order.total |price }}
 </div>
 
-
-
+    <div>
+        {%if order.state == 3%}
+            <button class="btn-outline-info" disabled>La commande a été annulée.</button>
+        {%else%}
+            {%if order.state != 2%}
+            <button class="btn-success">
+                <a href="{{current_url}}&state=2">Confirmer le retrait en magasin</a>
+                </button>
+            <button class="btn-danger">
+                    <a href="{{ current_url }}&state=3">Commande non retirée</a>
+            </button>
+            {% else %}
+            <button class="btn-outline-info" disabled>La commande a été retirée</button>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
 
 
