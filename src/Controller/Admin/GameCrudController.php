@@ -8,7 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -75,11 +75,10 @@ class GameCrudController extends AbstractCrudController
                 ->setUploadDir('/public/uploads')
                 ->setRequired($required),
 
-            MoneyField::new('price')->setLabel('Prix TTC')->setCurrency('EUR')->setHelp('Prix unitaire TTC du jeu.')->setStoredAsCents(false)
+            MoneyField::new('price')->setLabel('Prix TTC')->setCurrency('EUR')->setHelp('Prix unitaire TTC du jeu.')->setStoredAsCents(false),
+            IntegerField::new('stock')->setLabel('Stock')->setHelp('Quantité en stock'),
 
-
-            /*NumberField::new('stock')->setLabel('Stock')->setHelp('Quantité en stock'),
-            DateTimeField::new("createdAt")->setLabel('Date de création')->onlyOnIndex(),
+            /*DateTimeField::new("createdAt")->setLabel('Date de création')->onlyOnIndex(),
             DateTimeField::new("updatedAt")->setLabel('Date de modification')->onlyOnIndex(),*/
 
         ];

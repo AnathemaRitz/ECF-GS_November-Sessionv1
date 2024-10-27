@@ -6,6 +6,7 @@ use App\Repository\GameRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 class Game
 {
@@ -41,6 +42,9 @@ class Game
     #[ORM\ManyToOne(inversedBy: 'games')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Genre $genre = null;
+
+    #[ORM\Column(type: Types::SMALLINT, options: ['unsigned' => true])]
+    private ?int $stock = null;
 
     public function getId(): ?int
     {
@@ -151,6 +155,18 @@ class Game
     public function setGenre(?Genre $genre): static
     {
         $this->genre = $genre;
+
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(int $stock): static
+    {
+        $this->stock = $stock;
 
         return $this;
     }
