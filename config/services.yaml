@@ -21,4 +21,7 @@ services:
             - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
+    App\EventListener\OrderStateChangeListener:
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }
     # please note that last definitions always *replace* previous ones

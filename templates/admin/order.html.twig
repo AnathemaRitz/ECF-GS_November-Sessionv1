@@ -11,7 +11,9 @@
     <span>Passée le {{order.createdAt|date('d/m/Y')}}</span>
     <br/>
 {# TODO : Mettre un event listener au changement de statut pour maj date updated #}
-    <span>Mise à jour le {#  {order.updatedAt|date('d/m/Y')}}#}</span>
+    {% if order.updatedAt !=null %}
+    <span>Mise à jour le {{order.updatedAt|date('d/m/Y')}}</span>
+    {% endif %}
 
 <div class="row my-4">
     <div class="col md-6">
@@ -84,5 +86,3 @@
     </div>
 </div>
 {% endblock %}
-
-
