@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Customer;
 use App\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -130,7 +131,7 @@ class RegisterUserType extends AbstractType
                     'fields' => 'email'
                 ])
             ],
-            'data_class' => User::class,
+            'data_class' => Customer::class,
         ]);
     }
 }

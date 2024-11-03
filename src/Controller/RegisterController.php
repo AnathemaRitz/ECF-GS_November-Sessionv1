@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller;
+use App\Entity\Customer;
 use App\Entity\User;
 use App\Form\RegisterUserType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,7 +13,7 @@ class RegisterController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $user = new User();
+        $user = new Customer();
         $form = $this->createForm(RegisterUserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
