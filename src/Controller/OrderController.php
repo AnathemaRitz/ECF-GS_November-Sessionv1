@@ -44,14 +44,14 @@ class OrderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
 
             $order = new Order();
-            $order->setUser($this->getUser());
+            $order->setCustomer($this->getUser());
             $order->setCreatedAt(new \DateTimeImmutable());
             $order->setState(1);
 
             $order->setStoreName($form->get('store')->getData()->getName());
             $order->setPickUpDate($form->get('pickupDate')->getData());
 
-            $addressObj = $order->getUser();
+            $addressObj = $order->getCustomer();
 
             $address = $addressObj->getFirstname().' '.$addressObj->getLastname().'<br/>';
             $address .= $addressObj->getAddress().'<br/>';
@@ -95,7 +95,7 @@ class OrderController extends AbstractController
             $user = $this->getUser();
 
             if ($user) {
-                $order->setUser($user);
+                $order->setCustomer($user);
             }
 
             foreach($games as $game){

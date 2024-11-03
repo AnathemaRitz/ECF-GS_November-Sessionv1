@@ -11,122 +11,123 @@ use Doctrine\ORM\Mapping as ORM;
 
 
  #[ORM\Entity(repositoryClass: \App\Repository\CustomerRepository::class)]
- #[ORM\Table(name: 'customer')]
+                #[ORM\Table(name: 'customer')]
+               
+               class Customer extends User
+               {
+                  /* #[ORM\Column]
+                   private array $roles = [];*/
+               
+                   #[ORM\Column(length: 255)]
+                   private ?string $address = null;
+               
+                    #[ORM\Column(type: Types::SMALLINT, options: ['unsigned' => true])]
+                    private ?int $postal = null;
+               
+                   #[ORM\Column(length: 255)]
+                   private ?string $city = null;
+               
+                   /**
+                    * @var Collection<int, Order>
+                    */
+                   #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'customer')]
+                   private Collection $orders;
 
-class Customer extends User
-{
-   /* #[ORM\Column]
-    private array $roles = [];*/
+               
+                   public function __construct()
+                   {
+                       $this->orders = new ArrayCollection();
+                   }
+               
+               /*    /**
+                    * @see UserInterface
+                    *
+                    * @return list<string>
+                    */
+                   /*public function getRoles(): array
+                   {
+                       $roles = $this->roles;
+                       // guarantee every user at least has ROLE_USER
+                       $roles[] = 'ROLE_USER';
+               
+                       return array_unique($roles);
+                   }*/
+               
+                /*   /**
+                    * @param list<string> $roles
+                    */
+                  /* public function setRoles(array $roles): static
+                   {
+                       $this->roles = $roles;
+               
+                       return $this;
+                   }*/
+               
+                   public function getAddress(): ?string
+                   {
+                       return $this->address;
+                   }
+               
+                   public function setAddress(string $address): static
+                   {
+                       $this->address = $address;
+               
+                       return $this;
+                   }
+               
+                   public function getPostal(): ?int
+                   {
+                       return $this->postal;
+                   }
+               
+                   public function setPostal(int $postal): static
+                   {
+                       $this->postal = $postal;
+               
+                       return $this;
+                   }
+               
+                   public function getCity(): ?string
+                   {
+                       return $this->city;
+                   }
+               
+                   public function setCity(string $city): static
+                   {
+                       $this->city = $city;
+               
+                       return $this;
+                   }
 
-    #[ORM\Column(length: 255)]
-    private ?string $address = null;
+     /**
+      * @return Collection<int, Order>
+      */
+     public function getOrders(): Collection
+     {
+         return $this->orders;
+     }
 
-     #[ORM\Column(type: Types::SMALLINT, options: ['unsigned' => true])]
-     private ?int $postal = null;
+     public function addOrder(Order $order): static
+     {
+         if (!$this->orders->contains($order)) {
+             $this->orders->add($order);
+             $order->setCustomer($this);
+         }
 
-    #[ORM\Column(length: 255)]
-    private ?string $city = null;
+         return $this;
+     }
 
-    /**
-     * @var Collection<int, Order>
-     */
-    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'user')]
-    private Collection $orders;
+     public function removeOrder(Order $order): static
+     {
+         if ($this->orders->removeElement($order)) {
+             // set the owning side to null (unless already changed)
+             if ($order->getCustomer() === $this) {
+                 $order->setCustomer(null);
+             }
+         }
 
-    public function __construct()
-    {
-        $this->orders = new ArrayCollection();
-    }
-
-/*    /**
-     * @see UserInterface
-     *
-     * @return list<string>
-     */
-    /*public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }*/
-
- /*   /**
-     * @param list<string> $roles
-     */
-   /* public function setRoles(array $roles): static
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }*/
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): static
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getPostal(): ?int
-    {
-        return $this->postal;
-    }
-
-    public function setPostal(int $postal): static
-    {
-        $this->postal = $postal;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): static
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Order>
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Order $order): static
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders->add($order);
-            $order->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Order $order): static
-    {
-        if ($this->orders->removeElement($order)) {
-            // set the owning side to null (unless already changed)
-            if ($order->getUser() === $this) {
-                $order->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-}
+         return $this;
+     }
+ }
 
 

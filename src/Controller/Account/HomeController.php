@@ -14,7 +14,7 @@ class HomeController extends AbstractController
     public function index(OrderRepository $orderRepository): Response
     {
         $orders = $orderRepository->findBy([
-            'user' => $this->getUser(),
+            'customer' => $this->getUser(),
             'state' => [1,2,3]
         ]);
 

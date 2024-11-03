@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -44,8 +45,11 @@ class CustomerCrudController extends AbstractCrudController
             TextField::new("address")->setLabel('Adresse')->setDisabled(true),
             NumberField::new("postal")->setLabel('Code Postal')->setDisabled(true),
             TextField::new("city")->setLabel('Ville')->setDisabled(true),
+
         ];
     }
+//    TODO : créer une vue de récap des commandes clients et un field de count sur l'index '
+
 }
 
 
