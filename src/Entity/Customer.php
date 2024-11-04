@@ -37,6 +37,7 @@ use Doctrine\ORM\Mapping as ORM;
                    public function __construct()
                    {
                        $this->orders = new ArrayCollection();
+                       $this->setRoles(['ROLE_USER', 'ROLE_CUSTOMER']);
                    }
                
                /*    /**
