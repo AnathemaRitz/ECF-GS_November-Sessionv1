@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Customer;
+use App\Entity\Seller;
 use App\Entity\Genre;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -23,7 +24,7 @@ class DashboardController extends AbstractDashboardController
     {
 
             $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-            return $this->redirect($adminUrlGenerator->setController(CustomerCrudController::class)->generateUrl());
+            return $this->redirect($adminUrlGenerator->setController(StoreCrudController::class)->generateUrl());
 
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
@@ -48,6 +49,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Clients', 'fas fa-list', Customer::class);
+        yield MenuItem::linkToCrud('Vendeurs', 'fas fa-list', Seller::class);
 //        yield MenuItem::linkToCrud('Users', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Genres', 'fas fa-list', Genre::class);
         yield MenuItem::linkToCrud('Jeux', 'fas fa-list', Game::class);

@@ -9,7 +9,7 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         chain_provider:
             chain:
-                providers: [ app_user_provider, app_customer_provider ]
+                providers: [ app_user_provider, app_customer_provider, app_seller_provider ]
 
         app_user_provider:
             entity:
@@ -19,6 +19,11 @@ security:
         app_customer_provider:
             entity:
                 class: App\Entity\Customer
+                property: email
+
+        app_seller_provider:
+            entity:
+                class: App\Entity\Seller
                 property: email
         # used to reload user from session & other features (e.g. switch_user)
     firewalls:

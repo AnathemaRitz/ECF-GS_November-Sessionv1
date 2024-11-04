@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StoreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,6 +33,17 @@ class Store
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+
+    /**
+     * @var Collection<int, Seller>
+     */
+    #[ORM\OneToMany(targetEntity: Seller::class, mappedBy: 'store')]
+    private Collection $sellers;
+
+    public function __construct()
+    {
+        $this->sellers = new ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -111,6 +124,36 @@ class Store
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Seller>
+     */
+    public function getSellers(): Collection
+    {
+        return $this->sellers;
+    }
+
+    public function addSeller(Seller $seller): static
+    {
+        if (!$this->sellers->contains($seller)) {
+            $this->sellers->add($seller);
+            $seller->setStore($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSeller(Seller $seller): static
+    {
+        if ($this->sellers->removeElement($seller)) {
+            // set the owning side to null (unless already changed)
+            if ($seller->getStore() === $this) {
+                $seller->setStore(null);
+            }
+        }
 
         return $this;
     }

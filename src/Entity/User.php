@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
-#[ORM\DiscriminatorMap(['customer' => Customer::class])]
+#[ORM\DiscriminatorMap(['customer' => Customer::class, 'seller' => Seller::class])]
  abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
