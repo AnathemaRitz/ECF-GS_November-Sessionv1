@@ -85,7 +85,7 @@ class OrderCrudController extends AbstractCrudController
             IdField::new('id'),
             DateField::new('createdAt'),
             NumberField::new('state')->setLabel("Statut de la commande")->setTemplatePath('admin/state.html.twig'),
-            AssociationField::new('user')->setLabel('Client'),
+            AssociationField::new('customer')->setLabel('Client'),
             TextField::new('storeName')->setLabel('Magasin de retrait'),
             DateField::new('pickupDate')->setLabel('Date de retrait'), /*Doit être non modifiable*/
             DateField::new('updatedAt'),
