@@ -14,7 +14,7 @@ class OrderController extends AbstractController
     {
         $order = $orderRepository->findOneBy([
             'id' => $id_order,
-            'user' => $this->getUser()
+            'customer' => $this->getUser()
         ]);
 
         if (!$order) {

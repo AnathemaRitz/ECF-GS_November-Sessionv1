@@ -40,7 +40,7 @@ class Order
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    private ?Customer $customer = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
@@ -159,14 +159,16 @@ class Order
         return $this;
     }
 
-    public function getUser(): ?User
+
+
+    public function getCustomer(): ?Customer
     {
-        return $this->user;
+        return $this->customer;
     }
 
-    public function setUser(?User $user): static
+    public function setCustomer(?Customer $customer): static
     {
-        $this->user = $user;
+        $this->customer = $customer;
 
         return $this;
     }
@@ -182,4 +184,5 @@ class Order
 
         return $this;
     }
+
 }
