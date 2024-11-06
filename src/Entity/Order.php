@@ -23,8 +23,6 @@ class Order
     #[ORM\Column]
     private ?int $state = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $storeName = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $billingAddress = null;
@@ -44,6 +42,10 @@ class Order
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\ManyToOne(inversedBy: 'orders', cascade: ['persist'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Store $pickUpStore = null;
 
     public function __construct()
     {
@@ -92,17 +94,6 @@ class Order
         return $this;
     }
 
-    public function getStoreName(): ?string
-    {
-        return $this->storeName;
-    }
-
-    public function setStoreName(string $storeName): static
-    {
-        $this->storeName = $storeName;
-
-        return $this;
-    }
 
     public function getBillingAddress(): ?string
     {
@@ -181,6 +172,18 @@ class Order
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getPickUpStore(): ?Store
+    {
+        return $this->pickUpStore;
+    }
+
+    public function setPickUpStore(?Store $pickUpStore): static
+    {
+        $this->pickUpStore = $pickUpStore;
 
         return $this;
     }

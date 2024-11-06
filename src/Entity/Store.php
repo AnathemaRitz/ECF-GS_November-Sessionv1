@@ -40,14 +40,22 @@ class Store
     #[ORM\OneToMany(targetEntity: Seller::class, mappedBy: 'store')]
     private Collection $sellers;
 
+    /**
+     * @var Collection<int, Order>
+     */
+    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'pickUpStore')]
+    private Collection $orders;
+
     public function __construct()
     {
         $this->sellers = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
+
 
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
 
@@ -152,6 +160,36 @@ class Store
             // set the owning side to null (unless already changed)
             if ($seller->getStore() === $this) {
                 $seller->setStore(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): static
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setPickUpStore($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): static
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getPickUpStore() === $this) {
+                $order->setPickUpStore(null);
             }
         }
 

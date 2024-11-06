@@ -48,8 +48,10 @@ class OrderController extends AbstractController
             $order->setCreatedAt(new \DateTimeImmutable());
             $order->setState(1);
 
-            $order->setStoreName($form->get('store')->getData()->getName());
             $order->setPickUpDate($form->get('pickupDate')->getData());
+            $order->setPickUpStore($form->get('store')->getData());
+            /*dd($form->get('store')->getData()->getId());*/
+
 
             $addressObj = $order->getCustomer();
 
