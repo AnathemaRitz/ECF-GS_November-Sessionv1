@@ -21,7 +21,7 @@ class OrderType extends AbstractType
     {
         $builder
 
-            ->add('store', EntityType::class, [
+            ->add('pickUpStore', EntityType::class, [
                 'label' => "Choisissez votre magasin de retrait",
                 'required' => true,
                 'class' => Store::class,

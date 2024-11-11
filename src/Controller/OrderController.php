@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Class\Cart;
 use App\Entity\Order;
 use App\Entity\OrderDetail;
+use App\Entity\Store;
 use App\Form\OrderType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -48,8 +49,10 @@ class OrderController extends AbstractController
             $order->setCreatedAt(new \DateTimeImmutable());
             $order->setState(1);
 
+
             $order->setPickUpDate($form->get('pickupDate')->getData());
-            $order->setPickUpStore($form->get('store')->getData());
+            $order->setPickUpStore($form->get('pickUpStore')->getData());
+
             /*dd($form->get('store')->getData()->getId());*/
 
 
@@ -74,6 +77,7 @@ class OrderController extends AbstractController
             $entityManager->persist($order);
             $session = $request->getSession();
             $session->set('order', $order);
+            $session->set('store_id', $order->getPickUpStore()->getId());
             /*dd($order) ;*/
         }
 
@@ -95,6 +99,11 @@ class OrderController extends AbstractController
         if ($order) {
 
             $user = $this->getUser();
+
+            $storeId= $session->get('store_id');
+            $store = $entityManager->getRepository(Store::class)->find($storeId);
+            $order->setPickUpStore($store);
+
 
             if ($user) {
                 $order->setCustomer($user);
@@ -119,6 +128,7 @@ class OrderController extends AbstractController
 
             $session->remove('cart');
             $session->remove('order');
+            $session->remove('store_id');
 
 
             return $this->render('order/confirmation.html.twig');
