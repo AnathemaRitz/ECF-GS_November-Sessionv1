@@ -77,9 +77,8 @@ class GameCrudController extends AbstractCrudController
 
             MoneyField::new('price')->setLabel('Prix TTC')->setCurrency('EUR')->setHelp('Prix unitaire TTC du jeu.')->setStoredAsCents(false),
             IntegerField::new('stock')->setLabel('Stock')->setHelp('Quantité en stock'),
-
-            /*DateTimeField::new("createdAt")->setLabel('Date de création')->onlyOnIndex(),
-            DateTimeField::new("updatedAt")->setLabel('Date de modification')->onlyOnIndex(),*/
+            DateTimeField::new("createdAt")->setLabel('Créé le')->onlyOnIndex(),
+            DateTimeField::new("updatedAt")->setLabel('Modifié le')->onlyOnIndex(),
 
         ];
     }
