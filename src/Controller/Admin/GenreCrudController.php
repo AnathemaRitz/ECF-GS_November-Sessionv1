@@ -29,8 +29,8 @@ class GenreCrudController extends AbstractCrudController
             IdField::new("id")->setLabel('Id')->onlyOnIndex(),
             TextField::new("name")->setLabel('Nom')->setHelp("Genre du jeu "),
             SlugField::new("slug")->setLabel('Slug')->setTargetFieldName('name')->setHelp("URL autogénérée du genre."),
-            /*DateTimeField::new("createdAt")->setLabel('Date de création')->onlyOnIndex(),
-            DateTimeField::new("updatedAt")->setLabel('Date de modification')->onlyOnIndex(),*/
+            DateTimeField::new("createdAt")->setLabel('Date de création')->onlyOnIndex(),
+            DateTimeField::new("updatedAt")->setLabel('Date de modification')->onlyOnIndex(),
         ];
     }
 }
