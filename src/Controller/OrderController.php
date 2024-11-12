@@ -46,7 +46,6 @@ class OrderController extends AbstractController
 
             $order = new Order();
             $order->setCustomer($this->getUser());
-            $order->setCreatedAt(new \DateTimeImmutable());
             $order->setState(1);
 
 
