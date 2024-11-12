@@ -24,7 +24,7 @@ class Store
     #[ORM\Column(length: 255)]
     private ?string $address = null;
 
-    #[ORM\Column(type: Types::SMALLINT, options: ['unsigned' => true])]
+    #[ORM\Column(type: Types::INTEGER, options: ['unsigned' => true], length: 6)]
     private ?int $postal = null;
 
     #[ORM\Column(length: 255)]

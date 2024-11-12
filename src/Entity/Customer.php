@@ -20,8 +20,8 @@ use Doctrine\ORM\Mapping as ORM;
                
                    #[ORM\Column(length: 255)]
                    private ?string $address = null;
-               
-                    #[ORM\Column(type: Types::SMALLINT, options: ['unsigned' => true])]
+
+                    #[ORM\Column(type: Types::INTEGER, length: 6, options: ['unsigned' => true])]
                     private ?int $postal = null;
                
                    #[ORM\Column(length: 255)]
