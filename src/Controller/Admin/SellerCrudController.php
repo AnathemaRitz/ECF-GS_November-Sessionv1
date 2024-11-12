@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -67,6 +68,8 @@ class SellerCrudController extends AbstractCrudController
                 ],
             ])->setRequired(true),
             AssociationField::new('store')->setLabel('Magasin'),
+            DateTimeField::new("createdAt")->setLabel('Créé le')->onlyOnIndex(),
+            DateTimeField::new("updatedAt")->setLabel('Modifié le')->onlyOnIndex(),
         ];
     }
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void

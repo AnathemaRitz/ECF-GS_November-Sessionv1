@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -45,6 +46,8 @@ class CustomerCrudController extends AbstractCrudController
             TextField::new("address")->setLabel('Adresse')->setDisabled(true),
             NumberField::new("postal")->setLabel('Code Postal')->setDisabled(true),
             TextField::new("city")->setLabel('Ville')->setDisabled(true),
+            DateTimeField::new("createdAt")->setLabel('Créé le')->onlyOnIndex(),
+            DateTimeField::new("updatedAt")->setLabel('Modifié le')->onlyOnIndex(),
 
         ];
     }

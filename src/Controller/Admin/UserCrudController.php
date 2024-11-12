@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -35,6 +36,8 @@ class UserCrudController extends AbstractCrudController
             TextField::new("address")->setLabel('Adresse'),
             NumberField::new("postal")->setLabel('Code Postal'),
             TextField::new("city")->setLabel('Ville'),
+            DateTimeField::new("createdAt")->setLabel('Créé le')->onlyOnIndex(),
+            DateTimeField::new("updatedAt")->setLabel('Modifié le')->onlyOnIndex(),
         ];
     }
 }

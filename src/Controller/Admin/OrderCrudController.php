@@ -13,8 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -88,8 +87,9 @@ class OrderCrudController extends AbstractCrudController
             AssociationField::new('customer')->setLabel('Client'),
             AssociationField::new('pickUpStore')->setLabel('Magasin de retrait'),
             DateField::new('pickupDate')->setLabel('Date de retrait'), /*Doit être non modifiable*/
-            DateField::new('updatedAt'),
-            NumberField::new('total')->setLabel("Total")
+            NumberField::new('total')->setLabel("Total"),
+            DateTimeField::new("createdAt")->setLabel('Créé le')->onlyOnIndex(),
+            DateTimeField::new("updatedAt")->setLabel('Modifié le')->onlyOnIndex(),
 
         ];
     }
