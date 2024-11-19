@@ -5,7 +5,7 @@
 {% block body %}
 
 <div class="container my-5">
-    <h1>Bonjour{{ app.user }}! </h1>
+    <h1>Bonjour {{ app.user }}! </h1>
     <h2> Magasin {{ store }}</h2>
     <div class="row">
         <div class="col mt-3">
@@ -50,11 +50,15 @@
         </div>
     <br>
         <div>
+        </div>
+        <hr>
+        <br/><br/>
             <h5> Tableau Récapitulatif des ventes</h5>
+        <br/><br/>
             <p><em>dashboard</em></p>
         </div>
     </div>
-</div>
+
 
 
 {% endblock %}
