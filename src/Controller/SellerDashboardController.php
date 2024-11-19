@@ -34,7 +34,7 @@ class SellerDashboardController extends AbstractController
         return $this->render('seller_dashboard/index.html.twig', [
             'orders' => $orders,
             'store' => $store,
-            'controller_name' => 'SellerDashboardController',
+            'controller_name' => 'Espace Vendeur',
         ]);
     }
     #[Route('/seller/order/{id_order}', name: 'app_seller_order', methods: ["GET"])]
@@ -69,6 +69,7 @@ class SellerDashboardController extends AbstractController
         $order->setState($state);
         $entityManager->persist($order);
         $entityManager->flush();
+        $this->addFlash('success', "Statut correctement modifié.");
 
         return $this->redirectToRoute('app_seller_order', ['id_order' => $id_order]);
     }
