@@ -69,6 +69,7 @@ class SellerDashboardController extends AbstractController
         $order->setState($state);
         $entityManager->persist($order);
         $entityManager->flush();
+        $this->addFlash('success', "Statut correctement modifié.");
 
         return $this->redirectToRoute('app_seller_order', ['id_order' => $id_order]);
     }
