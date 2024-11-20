@@ -28,6 +28,7 @@
         "symfony/http-foundation": "7.1.*",
         "symfony/intl": "7.1.*",
         "symfony/mailer": "7.1.*",
+        "symfony/mailjet-mailer": "7.1.*",
         "symfony/mime": "7.1.*",
         "symfony/monolog-bundle": "^3.10",
         "symfony/property-access": "7.1.*",
