@@ -23,7 +23,10 @@
             <button class="btn btn-success mt-3" type="submit">Connexion</button>
         </form>
 
-        <div class="mt-5">Vous n'avez pas de compte? <a href={{path('app_register') }}>Inscrivez-vous ici.</a></div>
+        <div class="mt-5">Vous n'avez pas de compte? <a href={{path('app_register') }}>Inscrivez-vous ici.</a>
+            <br/>
+         <a href={{path('app_forgot_password_request') }}><I>J'ai oublié mon mot de passe.</I></a>
+        </div>
 
     </div>
 {% endblock %}
