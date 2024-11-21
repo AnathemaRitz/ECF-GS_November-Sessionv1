@@ -14,10 +14,20 @@ class CartController extends AbstractController
     #[Route('/cart', name: 'app_cart')]
     public function index(Cart $cart): Response
     {
+        if ($cart->getCart() == 0) {
+            $this->addFlash(
+                "danger",
+                "Votre panier est vide."
+            );
+            return $this->redirectToRoute('app_home');
+        }
+
+
         return $this->render('cart/index.html.twig',[
             'cart'=> $cart->getCart(),
             'total' => $cart->getTotal(),
         ]);
+
     }
 
     #[Route('/cart/add/{id}', name: 'app_cart_add')]
@@ -40,18 +50,24 @@ class CartController extends AbstractController
     #[Route('/cart/decrease/{id}', name: 'app_cart_decrease')]
     public function decrease($id,Cart $cart): Response
     {
-/*Voir ici comment rediriger vers la home si le panier redevient 0 et comment empêcher la vue du panier s'il est vide*/
 
         $cart->decrease($id);
+        if (count($cart->getCart()) == 0) {
+            $this->addFlash(
+                "danger",
+                "Votre panier est vide."
+            );
+            return $this->redirectToRoute('app_home');
+        }
+        else {
+            $this->addFlash(
+                "success",
+                "Produit supprimé."
+            );
+            return $this->redirectToRoute('app_cart'
 
-        $this->addFlash(
-            "success",
-            "Produit supprimé."
-        );
-
-        return $this->redirectToRoute('app_cart'
-
-        );
+            );
+        }
     }
 
     #[Route('/cart/remove', name: 'app_cart_remove')]
@@ -70,4 +86,4 @@ class CartController extends AbstractController
 
 }
 
-/* TODO : Vérifier la redirection vers la home quand le panier est vidé et empêcher l'affichage d'une page si le panier est vide*/
+
