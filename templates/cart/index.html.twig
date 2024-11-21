@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container my-5">
+    <h1>Panier</h1>
+
+    <div class ="row">
+
+        <div class = "col-md-8">
+            {% for game in cart %}
+                <div class ="row mt-2">
+                    <div class="col-md-2">
+                        <img src="/uploads/{{game.object.image}}" class="img-thumbnail" style="border-radius: 10px"  alt="{{game.object.name}}">
+                    </div>
+                    <div class="col-md-6">
+                        <strong>{{game.object.name}}</strong>
+                        <span class="d-block small">Prix unitaire: {{game.object.price| price}}
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <a href="{{ path('app_cart_decrease', { id : game.object.id } ) }}">-</a> <span class="badge text-bg-secondary">x{{ game.qty }}</span> <a href="{{ path('app_cart_add', { id : game.object.id } ) }}">+</a>
+                    </div>
+                    <div class="col-md-2">
+                        <strong>{{(game.qty*game.object.price) | price}}</strong>
+                    </div>
+                </div>
+            {%endfor%}
+            <a href="{{path("app_cart_remove")}}" class= "small mt-block">Vider le panier</a>
+        </div>
+
+        <div class="col-md-4">
+            <div class="bg-light p-3">
+                <div class= "d-flex justify-content-between">
+                    <span class="fw-bold">Total produit:</span>
+                    <span>{{fullCartQuantity}}</span>
+                </div>
+                <div class= "d-flex justify-content-between mt-3">
+                    <span class="fw-bold">Prix Total:</span>
+                    <span>{{ total|price }}</span>
+                </div>
+                <div>
+                    <a href="{{path( "app_order")}}" class="btn btn-success w-100 mt-3">Commander</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

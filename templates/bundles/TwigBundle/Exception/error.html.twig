@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Oops !{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        {% if status_code == "404" %}
+      <h1> Page introuvable</h1>
+        <br/>
+        <br/>
+     <p> Cette page est introuvable. Vous pouvez <a href="{{ path('app_home')}}">retourner à l'accueil.</a> </p>
+        {% elseif status_code == "403" %}
+            <h1> Acccès non autorisé</h1>
+            <br/>
+            <br/>
+            <p> Vous n'avez pas les droits nécessaires pour accéder à cette ressource. Veuillez <a href="{{ path('app_login') }}">vous connecter</a> ou <a href="{{ path('app_home')}}">retourner à l'accueil.</a> </p>
+        {% elseif status_code == "500" %}
+        <h1> Une erreur est survenue</h1>
+        <br/>
+        <br/>
+        <p> Une erreur est survenue. Vous pouvez <a href="{{ path('app_home')}}">retourner à l'accueil.</a> </p>
+        {% endif %}
+    </div>
+{% endblock %}

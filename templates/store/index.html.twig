@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container my-5 small-container">
+        <h1>Votre magasin {{ store.name }}</h1>
+        <br>
+
+        <h4>{{ store.name }}</h4>
+            {{ store.address }} <br>
+            {{ store.postal }} , {{store.city }} <br>
+            {{ store.email }} <br>
+
+
+    </div>
+{% endblock %}
+
+
+
+
+

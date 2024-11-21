@@ -1,0 +1,7 @@
+{% if field.value == 1 %}
+    <span class="badge text-bg-info">Validée</span>
+{% elseif field.value == 2 %}
+    <span class="badge text-bg-success">Retirée</span>
+{% elseif field.value == 3 %}
+    <span class="badge text-bg-danger">Annulée</span>
+{% endif %}

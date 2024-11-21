@@ -1,0 +1,88 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+{% block main %}
+<h2> Statut de la commande</h2>
+
+
+<h3>Commande n°{{order.id}}</h3>
+   {{include('admin/state.html.twig',{field: {'value':order.state}})}}
+    <br/>
+    <br/>
+    <span>Passée le {{order.createdAt|date('d/m/Y')}}</span>
+    <br/>
+{# TODO : Mettre un event listener au changement de statut pour maj date updated #}
+    {% if order.updatedAt !=null %}
+    <span>Mise à jour le {{order.updatedAt|date('d/m/Y')}}</span>
+    {% endif %}
+
+<div class="row my-4">
+    <div class="col md-6">
+        <strong>Informations client:</strong> <br/>
+        {{order.billingAddress | raw}}
+    </div>
+
+   <div class="row my-4">
+        <div class="col md-6">
+            <strong>Date de retrait choisie:</strong> <br/>
+            {{order.pickupDate|date('d-m-Y')}}
+        </div>
+
+       {# TODO: Mettre ici le récap client #}
+
+        <div class="col md-6">
+            <strong>Magasin de retrait </strong><br/>
+            {{order.pickUpStore.name }}
+            {#Rajouter ici les autres informations du magasin #}
+        </div>
+
+   </div>
+
+   <strong>Contenu de la commande: </strong><br/>
+
+   <table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Nom du produit</th>
+        <th scope="col">Quantité</th>
+        <th scope="col">Prix unitaire</th>
+        <th scope="col">Total</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for game in order.orderDetails %}
+            <tr>
+                <td>
+                    <img src="/uploads/{{ game.gameImage }}" height="100px" width="100px" alt="{{ game.gameName }}">
+                </td>
+                <td>{{ game.gameName }}</td>
+                <td>{{ game.gameQuantity }}</td>
+                <td>{{ game.gamePrice|price}}</td>
+               <td>{{ (game.gamePrice * game.gameQuantity)|price }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="text-right fs-3">
+    <strong>Total  : </strong> {{ order.total |price }}
+</div>
+
+    <div>
+        {%if order.state == 3%}
+            <button class="btn-outline-info w-100 mt-3" disabled>La commande a été annulée.</button>
+        {%else%}
+            {%if order.state != 2%}
+            <button class="btn btn-success w-100 ">
+                <a href="{{current_url}}&state=2">Confirmer le retrait en magasin</a>
+                </button>
+            <button class=" btn btn-danger w-100">
+                    <a href="{{ current_url }}&state=3">Commande non retirée</a>
+            </button>
+            {% else %}
+            <button class="btn btn-outline-info w-100 mt-3" disabled>La commande a été retirée</button>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

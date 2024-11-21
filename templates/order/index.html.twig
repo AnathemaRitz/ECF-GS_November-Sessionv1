@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container my-5 small-container">
+        <h1>Commande</h1>
+        <br>
+
+        <h4>Vos informations de facturation</h4>
+        <br>
+
+        <span id="userInfo">
+            {% if app.user %}
+            {{ app.user.firstname }} {{ app.user.lastname }} <br>
+            {{ app.user.address }} <br>
+            {{ app.user.postal }} , {{ app.user.city }}
+            <br>
+            <br>
+            Une erreur dans les informations ci-dessus ? <a href={{ path('app_account') }}> <em> Corrigez vos informations personnelles.</em></a>
+
+            {% endif %}
+        </span>
+
+        <hr>
+
+        <h4>Modalités de retrait</h4>
+
+        {{form_start(pickupForm)}}
+
+        {{form_end(pickupForm)}}
+
+
+    </div>
+
+    {#TODO : ingest le script js  restrict time dans cette vue#}
+    <script src="{{ asset('js/forms/restrictDate.js') }}"></script>
+{% endblock %}
+
+
+
+
+

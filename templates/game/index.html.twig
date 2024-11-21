@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="/uploads/{{game.image}}" class="img-thumbnail" style="width:650px;height:650px;object-fit:cover; border-radius: 10px;" alt="{{game.name}}">
+                {# TODO : avec le forcing de taille, l'image n'est pas responsive sur les plus petits écrans. voir également comment imposer un format défini avant upload pour garder une homogénéité visuelle #}
+            </div>
+            <div class="col-md-6">
+                <small><i><a href="{{path('app_genre',{slug: game.genre.slug})}}">{{game.genre.name}}</a> > {{ game.name }}</i></small>
+                <h1>{{game.name}}</h1>
+                <h6> {{game.publisher}} - Sorti en {{game.releaseYear}} </h6>
+                {%if game.stock>0 %}
+                    <span class="badge bg-success">En stock</span>
+                {% else %}
+                    <span class="badge bg-danger">Rupture de stock</span>
+                {% endif %}
+                <br>
+                <span class= "d-block mb-3">{{game.price | price}}</span>
+                {{game.description | raw}}
+                <br>
+                <br>
+
+                <p>PEGI {{game.pegi}} </p>
+                {% if game.stock > 0 %}
+                    {%if app.user %}
+                        <a href= "{{ path ('app_cart_add', {id : game.id} )}}}" class ="btn btn-success w-100 mt-3">Ajouter au panier</a>
+                    {% else %}
+                        <a class ="btn btn-warning w-100 mt-3 disabled" >Connectez vous pour ajouter un produit au panier</a>
+                    {% endif %}
+                {% else %}
+                    <a class ="btn btn-danger w-100 mt-3 disabled" >Rupture de stock</a>
+                {% endif %}
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+{% endblock %}

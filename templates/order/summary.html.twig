@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container my-5">
+        <h1>Récapitulatif de la commande: </h1>
+
+        <div class ="row">
+
+            <div class="col-md-8">
+
+                <div class="bg-light p-3">
+                    <strong>Contenu du panier</strong><br/>
+                    {% for game in cart %}
+                        <div class ="row mt-2">
+                            <div class="col-md-2">
+                                <img src="/uploads/{{game.object.image}}" class="img-fluid" style="border-radius: 10px" alt="{{game.object.name}}">
+                            </div>
+                            <div class="col-md-6">
+                                <strong>{{game.object.name}}</strong>
+                                <span class="d-block small">Prix unitaire: {{game.object.price| price}}
+                            </div>
+                            <div class="col-md-2 text-right">
+                                <span class="badge badge-secondary">x{{ game.qty }}</span>
+                            </div>
+                            <div class="col-md-2">
+                                <strong>{{(game.qty*game.object.price) | price}}</strong>
+                            </div>
+                        </div>
+                    {%endfor%}
+                </div>
+
+                <hr>
+
+                <div class="bg-light p-3 my-3">
+                    <strong>Date de retrait choisie:</strong> <br/>
+                    <strong>{{choices.pickupDate|date('d-m-Y')}}</strong>
+                </div>
+
+                <div class="bg-light p-3 my-3">
+                    <strong>Magasin de retrait choisi: </strong> <br/>
+                    <br/>
+                    <strong>{{choices.pickUpStore.name}}</strong> <br/>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="bg-light p-3">
+                    <div class= "d-flex justify-content-between">
+                        <span class="fw-bold">Total produits:</span>
+                        <span>{{fullCartQuantity}}</span>
+                    </div>
+
+                    <div class= "d-flex justify-content-between mt-3">
+                        <span class="fw-bold">Total Commande:</span>
+                        <span>{{ (total |price) }}</span>
+                    </div>
+                    <div>
+                        <form method="POST" action="{{ path('app_order_validation') }}">
+                            <button type="submit" class="btn btn-success w-100 mt-3">Valider la commande</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

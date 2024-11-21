@@ -1,0 +1,25 @@
+<h1>Espace membre</h1>
+<ul class="nav flex-column bg-light-blue">
+    {% if is_granted('ROLE_ADMIN') %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('admin') }}">Dashboard</a>
+    </li>
+    {% elseif is_granted('ROLE_SELLER') %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_seller_dashboard') }}">Dashboard</a>
+    </li>
+    {% endif %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_account') }}">Mes commandes</a>
+    </li>
+    {# TODO : Permettre la modification des données personnelles
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_account') }}">Mes données personnelles</a>
+    </li>#}
+   <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_account_modify_pwd') }}">Modifier mon mot de passe</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_logout') }}">Me déconnecter</a>
+    </li>
+</ul>
