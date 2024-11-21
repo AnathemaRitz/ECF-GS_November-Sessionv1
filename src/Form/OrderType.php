@@ -33,6 +33,7 @@ class OrderType extends AbstractType
                 'label'=> "Choisissez votre date de retrait",
                 'widget' => 'choice',
                 'input' => 'datetime_immutable',
+                'data' => new \DateTimeImmutable('now'),
                 'constraints' => [
                     new Assert\NotNull(),
                     new Assert\Callback(function ($date, ExecutionContextInterface $context) {

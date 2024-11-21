@@ -23,6 +23,7 @@
                     <div class="col-md-6">
                         <strong>Adresse de facturation :</strong><br/>
                         {{ order.billingAddress|raw }}
+                        <br><br>
                     </div>
                     <div class="col-md-6">
                         <strong>Magasin de retrait</strong><br/>
@@ -51,7 +52,7 @@
                     {% for game in order.orderDetails %}
                         <tr>
                             <td>
-                                <img src="/uploads/{{ game.gameImage }}" height="100px" width="100px" alt="{{ game.gameName }}">
+                                <img src="/uploads/{{ game.gameImage }}" class="game-image" alt="{{ game.gameName }}">
                             </td>
                             <td>{{ game.gameName }}</td>
                             <td>{{ game.gameQuantity }}</td>
@@ -63,7 +64,8 @@
                 </table>
 
                 <div>
-                    <strong>Total T.T.C : </strong> {{ order.total|price }}
+                    {#TODO : Corriger l'alignement du prix pour qu'il soit à droite#}
+                    <h3><strong>Total T.T.C : </strong> {{ order.total|price }}</h3>
                 </div>
 
             </div>

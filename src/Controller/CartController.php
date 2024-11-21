@@ -14,7 +14,7 @@ class CartController extends AbstractController
     #[Route('/cart', name: 'app_cart')]
     public function index(Cart $cart): Response
     {
-        if (count($cart->getCart()) == 0) {
+        if ($cart->getCart() == 0) {
             $this->addFlash(
                 "danger",
                 "Votre panier est vide."
@@ -86,4 +86,4 @@ class CartController extends AbstractController
 
 }
 
-
+//TODO: Conserver le panier de l'utilisateur à la reconexion

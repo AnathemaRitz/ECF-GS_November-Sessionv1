@@ -3,13 +3,21 @@
 {% block body %}
 
     <div class="container-flex my-4">
-
-        <div class="row">
-
+     <div class="row">
             <div class="col-md-1" style="padding-top: 100px">
-                {% include 'genre/_menu_genres.html.twig' %}
+                <ul>
+                    <li class="nav-item dropdown align-content-start ">
+                        <a class="nav-link text-bg-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Genres
+                        </a>
+                        <ul class="dropdown-menu">
+                            {%for genre in allGenres %}
+                                <li><a class="dropdown-item" href="{{ path('app_genre', {slug : genre.slug}) }}">{{ genre.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
             </div>
-
             <div class="col-md-10">
                 <h1>Shop</h1>
                 <p>{{ allGames|length }} produit(s) trouvé(s).</p>
