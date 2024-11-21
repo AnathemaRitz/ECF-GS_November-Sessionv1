@@ -26,4 +26,10 @@ services:
     App\EventListener\OrderStateChangeListener:
         tags:
             - { name: doctrine.event_listener, event: preUpdate }
+
+    #App\EventListener\AccessDeniedExceptionListener:
+        #arguments:
+            #$sessionFactory: '@session.factory'
+        #tags:
+            #- { name: kernel.event_listener, event: kernel.exception }
     # please note that last definitions always *replace* previous ones

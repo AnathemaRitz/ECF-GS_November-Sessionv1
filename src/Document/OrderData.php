@@ -1,5 +1,5 @@
 <?php
-/*
+
 namespace App\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
@@ -15,5 +15,5 @@ class OrderData
 
     #[MongoDB\Field(type: 'float')]
     protected float $price;
-}*/
+}
 
