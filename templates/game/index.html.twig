@@ -5,7 +5,8 @@
     <div class="container my-5">
         <div class="row">
             <div class="col-md-6">
-                <img src="/uploads/{{game.image}}"class="img-fluid" alt="{{game.name}}">
+                <img src="/uploads/{{game.image}}" class="img-thumbnail" style="width:650px;height:650px;object-fit:cover; border-radius: 10px;" alt="{{game.name}}">
+                {# TODO : avec le forcing de taille, l'image n'est pas responsive sur les plus petits écrans. voir également comment imposer un format défini avant upload pour garder une homogénéité visuelle #}
             </div>
             <div class="col-md-6">
                 <small><i><a href="{{path('app_genre',{slug: game.genre.slug})}}">{{game.genre.name}}</a> > {{ game.name }}</i></small>

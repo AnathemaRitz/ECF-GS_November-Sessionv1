@@ -51,7 +51,7 @@
                     {% for game in order.orderDetails %}
                         <tr>
                             <td>
-                                <img src="/uploads/{{ game.gameImage }}" width="100px" alt="">
+                                <img src="/uploads/{{ game.gameImage }}" height="100px" width="100px" alt="{{ game.gameName }}">
                             </td>
                             <td>{{ game.gameName }}</td>
                             <td>{{ game.gameQuantity }}</td>

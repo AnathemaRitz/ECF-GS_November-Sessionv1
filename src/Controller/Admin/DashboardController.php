@@ -24,7 +24,7 @@ class DashboardController extends AbstractDashboardController
     {
 
             $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-            return $this->redirect($adminUrlGenerator->setController(StoreCrudController::class)->generateUrl());
+            return $this->redirect($adminUrlGenerator->setController(OrderCrudController::class)->generateUrl());
 
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
@@ -50,12 +50,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Clients', 'fas fa-list', Customer::class);
         yield MenuItem::linkToCrud('Vendeurs', 'fas fa-list', Seller::class);
-//        yield MenuItem::linkToCrud('Users', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Genres', 'fas fa-list', Genre::class);
         yield MenuItem::linkToCrud('Jeux', 'fas fa-list', Game::class);
         yield MenuItem::linkToCrud('Magasins', 'fas fa-list', Store::class);
         yield MenuItem::linkToCrud('Commandes', 'fas fa-list', Order::class);
-        yield MenuItem::linkToCrud('Users', 'fas fa-list', User::class);
+       /* yield MenuItem::linkToCrud('Users', 'fas fa-list', User::class);*/
         /*yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);*/
     }
 }

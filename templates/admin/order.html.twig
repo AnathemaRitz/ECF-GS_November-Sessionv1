@@ -53,7 +53,7 @@
         {% for game in order.orderDetails %}
             <tr>
                 <td>
-                    <img src="/uploads/{{ game.gameImage }}" width="100px" alt="">
+                    <img src="/uploads/{{ game.gameImage }}" height="100px" width="100px" alt="{{ game.gameName }}">
                 </td>
                 <td>{{ game.gameName }}</td>
                 <td>{{ game.gameQuantity }}</td>
@@ -73,10 +73,10 @@
             <button class="btn-outline-info w-100 mt-3" disabled>La commande a été annulée.</button>
         {%else%}
             {%if order.state != 2%}
-            <button class="btn btn-success w-100 mt3">
+            <button class="btn btn-success w-100 ">
                 <a href="{{current_url}}&state=2">Confirmer le retrait en magasin</a>
                 </button>
-            <button class=" btn btn-danger w-100 mt3">
+            <button class=" btn btn-danger w-100">
                     <a href="{{ current_url }}&state=3">Commande non retirée</a>
             </button>
             {% else %}

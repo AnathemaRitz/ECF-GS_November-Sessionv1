@@ -11,7 +11,7 @@
             {% for game in cart %}
                 <div class ="row mt-2">
                     <div class="col-md-2">
-                        <img src="/uploads/{{game.object.image}}" class="img-fluid" alt="{{game.object.name}}">
+                        <img src="/uploads/{{game.object.image}}" class="img-thumbnail" style="border-radius: 10px"  alt="{{game.object.name}}">
                     </div>
                     <div class="col-md-6">
                         <strong>{{game.object.name}}</strong>

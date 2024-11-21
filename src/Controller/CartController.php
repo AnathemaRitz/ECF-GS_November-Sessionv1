@@ -14,7 +14,7 @@ class CartController extends AbstractController
     #[Route('/cart', name: 'app_cart')]
     public function index(Cart $cart): Response
     {
-        if ($cart->getCart() == 0) {
+        if (count($cart->getCart()) == 0) {
             $this->addFlash(
                 "danger",
                 "Votre panier est vide."

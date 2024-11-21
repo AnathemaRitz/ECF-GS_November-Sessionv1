@@ -13,11 +13,11 @@
             <div class="col-md-10">
                 <h1>Shop</h1>
                 <p>{{ allGames|length }} produit(s) trouvé(s).</p>
-                <div class="row">
+                <div class="row" >
                         {% for game in allGames %}
-                            <div class= "col-md-3 text-center">
+                            <div class= "col-md-3 mt-4 text-center">
                                 <a href ="{{path('app_game',{slug : game.slug})}}" class= "text-decoration-none">
-                                    <img src="/uploads/{{game.image}}" class="img-fluid" width=100px>
+                                    <img src="/uploads/{{game.image}}" class="game-image" alt="{{ game.name }}">
                                     <span class="d-block fw-bold ">{{game.name}}</span>
                                 </a>
                                 <span class="d-block">{{game.price| price }}</span>
