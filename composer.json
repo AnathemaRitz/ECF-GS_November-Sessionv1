@@ -14,7 +14,6 @@
         "easycorp/easyadmin-bundle": "^4.13",
         "mailjet/mailjet-apiv3-php": "^1.6",
         "mongodb/mongodb": "^1.19",
-        "nelmio/cors-bundle": "^2.5",
         "nelmio/security-bundle": "^3.4",
         "symfony/apache-pack": "*",
         "symfony/asset": "7.1.*",
