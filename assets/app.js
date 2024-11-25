@@ -6,7 +6,7 @@
  */
 
 
-import './styles/app.scss';
+/*import './styles/app.scss';*/
 import 'bootstrap';
 import 'jquery';
 import '@popperjs/core';
